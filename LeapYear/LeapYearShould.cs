@@ -4,36 +4,28 @@ namespace LeapYear
 {
     public class LeapYearShould
     {
-        private LeapYear leapYear;
-
-        [SetUp]
-        public void Setup()
-        {
-            leapYear = new LeapYear();
-        }
-
         [TestCase(1996)]
         [TestCase(2012)]
         [TestCase(2020)]
-        public void BeDivisibleByFour(int year)
+        public void BeALeapYearIfDivisibleBy4(int input)
         {
-            Assert.IsTrue(leapYear.Execute(year));
+            Assert.IsTrue(LeapYear(input).IsLeapYear());
         }
 
         [TestCase(1997)]
         [TestCase(1999)]
         [TestCase(2001)]
-        public void NotBeDivisibleByFour(int year)
+        public void NotBeALeapYearIfDivisibleBy4(int input)
         {
-            Assert.IsFalse(leapYear.Execute(year));
+            Assert.IsFalse(LeapYear(input).IsLeapYear());
         }
 
         [TestCase(1600)]
         [TestCase(2000)]
         [TestCase(2400)]
-        public void BeDivisibleByFourHundred(int year)
+        public void BeALeapYearIfDivisibleBy400(int input)
         {
-            Assert.IsTrue(leapYear.Execute(year));
+            Assert.IsTrue(LeapYear(input).IsLeapYear());
         }
 
         [TestCase(1800)]
@@ -41,9 +33,14 @@ namespace LeapYear
         [TestCase(2100)]
         [TestCase(2200)]
         [TestCase(2300)]
-        public void BeDivisibleByFourHundredByOneHundredButNotByFourHundred(int year)
+        public void NotBeALeapYearIfDivisibleBy4By100ButNotBy400(int input)
         {
-            Assert.IsFalse(leapYear.Execute(year));
+            Assert.IsFalse(LeapYear(input).IsLeapYear());
+        }
+
+        private static Year LeapYear(int input)
+        {
+            return new Year(input);
         }
     }
 }
